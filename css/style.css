@@ -1,0 +1,417 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat:wght@700&family=Roboto:wght@400;500;700&display=swap");
+@keyframes skeleton {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: ease-in 0.5s;
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  min-height: 400px;
+  justify-content: space-between;
+}
+.question p {
+  font-size: 15px;
+  color: gray;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+.question h1 {
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.prev-next-button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.prev-next-button-wrapper button {
+  padding: 12px 32px;
+  border-radius: 50px;
+  border: 1px solid black;
+}
+.prev-next-button-wrapper button:hover {
+  color: white;
+  background-color: #474444;
+}
+
+.step-lines {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.step-lines span {
+  width: 28px;
+  height: 2px;
+  background-color: rgba(119, 113, 113, 0.5019607843);
+}
+.step-lines span.active {
+  background-color: rgba(0, 0, 0, 0.7647058824);
+}
+
+.step-buttons[data-button=category] {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  justify-content: center;
+  align-items: center;
+}
+.step-buttons[data-button=category] button {
+  padding: 10px 20px;
+  min-width: 240px;
+  width: 80%;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000;
+  color: #000;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+.step-buttons[data-button=category] button:hover {
+  box-shadow: -5px 13px 24px 0px rgba(156, 150, 150, 0.25);
+  -webkit-box-shadow: -5px 13px 24px 0px rgba(156, 150, 150, 0.25);
+  -moz-box-shadow: -5px 13px 24px 0px rgba(156, 150, 150, 0.25);
+  transform: scale(1.01);
+}
+.step-buttons[data-button=category] button.active {
+  background-color: #000;
+  color: white;
+}
+
+.step-buttons[data-button=color] {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  align-items: center;
+}
+.step-buttons[data-button=color] button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-indent: -9999em;
+  position: relative;
+}
+.step-buttons[data-button=color] button:hover {
+  transform: scale(0.94);
+}
+.step-buttons[data-button=color] button:hover::before {
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+.step-buttons[data-button=color] button.active {
+  transform: scale(0.9);
+}
+.step-buttons[data-button=color] button.active::before {
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+.step-buttons[data-button=color] button.active::after {
+  content: "✓";
+  font-size: 20px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-indent: 0;
+}
+
+.step-buttons[data-button=price] {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(2, max-content);
+  gap: 20px;
+}
+.step-buttons[data-button=price] button {
+  padding: 14px 24px;
+  border-radius: 24px;
+  border: 1px solid #000;
+}
+.step-buttons[data-button=price] button::before {
+  content: "€";
+}
+.step-buttons[data-button=price] button:hover {
+  background-color: #000;
+  color: white;
+}
+.step-buttons[data-button=price] button.active {
+  background-color: #000;
+  color: white;
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.not-found p {
+  padding: 8px 24px;
+  background-color: #000;
+  color: white;
+  font-size: 15px;
+  border-radius: 50px;
+}
+
+#backButton {
+  background-color: #ededed;
+  padding: 8px 20px;
+  text-align: center;
+  border-radius: 20px;
+  color: black;
+}
+#backButton:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.loading {
+  padding: 8px 24px;
+  background-color: #000;
+  color: white;
+  font-size: 15px;
+  border-radius: 50px;
+}
+
+.product-container {
+  width: 500px;
+  position: relative;
+}
+
+.product-title {
+  text-transform: uppercase;
+  font-size: 16px;
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+
+.product-price {
+  font-size: 16px;
+}
+
+.product-old-price {
+  font-size: 16px;
+  color: red;
+  margin-bottom: 20px;
+}
+
+.swiper {
+  width: 400px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 275px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: 0 auto;
+}
+.swiper-slide button {
+  padding: 12px 44px;
+  background-color: #000;
+  border-radius: 50px;
+  color: white;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+}
+.swiper-slide button:hover {
+  background-color: #ededed;
+  color: black;
+}
+
+.slider-image-wrapper {
+  min-height: 400px;
+  background-color: #000;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton 1.5s infinite linear;
+  max-width: 275px;
+  margin: 0 auto;
+}
+
+.swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+  position: absolute;
+  bottom: -8%;
+}
+
+.swiper-button-prev::after {
+  content: "←" !important;
+  color: #000;
+  width: 40px;
+  font-size: 35px !important;
+}
+
+.swiper-rtl .swiper-button-next::after {
+  content: "←" !important;
+  color: #000;
+  width: 40px;
+  font-size: 35px !important;
+}
+.swiper-rtl .swiper-button-prev::after {
+  content: "→" !important;
+  color: #000;
+  font-size: 35px !important;
+  width: 40px;
+}
+
+.swiper-button-next::after {
+  content: "→" !important;
+  color: #000;
+  font-size: 35px !important;
+  width: 40px;
+}
+
+span.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: #474444;
+}
+
+span.swiper-pagination-bullet {
+  background-color: #777171;
+  width: 30px;
+  border-radius: 0 !important;
+  height: 2px;
+}
+
+.reset-button-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15%;
+}
+
+#resetButton {
+  display: block;
+  background-color: black;
+  padding: 12px 24px;
+  color: black;
+  border-radius: 50px;
+  color: white;
+  z-index: 999999;
+}
+#resetButton:hover {
+  background-color: #ededed;
+  color: black;
+}
+
+@media screen and (max-width: 550px) {
+  .product-container {
+    width: 360px;
+    position: relative;
+    margin: 0 auto;
+  }
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+  .swiper-button-next {
+    display: block;
+    right: -14px !important;
+    left: inherit !important;
+  }
+  .swiper-button-prev {
+    left: -11px !important;
+  }
+  .swiper-slide button {
+    display: none;
+  }
+  #resetButton {
+    left: 4%;
+    top: 2%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .product-container {
+    width: 330px;
+    position: relative;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-height: 760px) {
+  .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+    bottom: -7% !important;
+  }
+}
+@media screen and (max-height: 420px) {
+  .swiper-slide img {
+    width: 120px;
+  }
+  .slider-image-wrapper {
+    min-height: 120px;
+  }
+  .question {
+    min-height: 277px;
+  }
+}/*# sourceMappingURL=style.css.map */
